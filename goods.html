@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sản phẩm</title>
+    <link rel="stylesheet" href="goods.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Danh sách sản phẩm</h1>
+        <div id="product-list" class="product-list"></div>
+        <div id="product-detail" class="product-detail">
+            <h2>Chi tiết sản phẩm</h2>
+            <div id="detail-content"></div>
+        </div>
+    </div>
+    <script>
+        // Dữ liệu sản phẩm (JSON)
+const products = [
+    {
+        "id": 1,
+        "name": "iPhone 13",
+        "price": "20.000.000 VNĐ",
+        "image": "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-13_2_.png",
+        "description": "Màn hình Super Retina XDR, chip A15 Bionic."
+    },
+    {
+        "id": 2,
+        "name": "Samsung Galaxy S22",
+        "price": "18.500.000 VNĐ",
+        "image": "https://clickbuy.com.vn/uploads/pro/samsung-galaxy-s22-5g-8gb-128gb-cu-99html-1048-178406-1024x1024-53951.jpg",
+        "description": "Màn hình Dynamic AMOLED 2X, camera 108MP."
+    },
+    {
+        "id": 3,
+        "name": "MacBook Air M1",
+        "price": "25.000.000 VNĐ",
+        "image": "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111883_macbookair.png",
+        "description": "Chip Apple M1, màn hình Retina 13.3 inch."
+    },
+    {
+        "id": 4,
+        "name": "iPhone 15 Pro",
+        "price": "25.000.000 VNĐ",
+        "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009278906",
+        "description": "Titanium, camera 48MP, chip A17 Pro."
+    }
+];
+
+// Hiển thị danh sách sản phẩm
+function renderProductList() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = products.map(product => `
+        <div class="product-card" onclick="showProductDetail(${product.id})">
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.price}</p>
+        </div>
+    `).join('');
+}
+
+// Hiển thị chi tiết sản phẩm
+function showProductDetail(productId) {
+    const product = products.find(p => p.id === productId);
+    const detailContent = document.getElementById('detail-content');
+    const productDetail = document.getElementById('product-detail');
+
+    detailContent.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p><strong>Giá:</strong> ${product.price}</p>
+        <p><strong>Mô tả:</strong> ${product.description}</p>
+    `;
+
+    productDetail.style.display = 'block'; // Hiển thị phần chi tiết
+}
+
+// Khởi tạo trang
+document.addEventListener('DOMContentLoaded', () => {
+    renderProductList();
+});
+    </script>
+</body>
+</html>
